@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group 'fr.romainricard.burp.extensions'
+version '2.0.0'
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://repository.jboss.org/nexus/content/repositories/releases/"
+    }
+}
+
+dependencies {
+    compileOnly 'net.portswigger.burp.extensions:montoya-api:2024.7'
+    implementation 'org.jboss.com.sun.httpserver:httpserver:1.0.8.Final'
+}
+
+jar {
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
